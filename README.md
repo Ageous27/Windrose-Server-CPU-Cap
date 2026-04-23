@@ -11,34 +11,28 @@ Windows Service in C#/.NET 8 (x64) that:
 - Removes cap immediately when players return or `ProcessAddPlayer` is detected.
 - Re-attaches automatically when the server restarts.
 
-## Build
+## Latest release
 
-```powershell
-dotnet build .\CpuGuard.sln
-```
-
-## Run in console mode (debug)
-
-```powershell
-dotnet run --project .\CpuGuard.Service\CpuGuard.Service.csproj -- --console
-```
-
-## Publish
-
-```powershell
-dotnet publish .\CpuGuard.Service\CpuGuard.Service.csproj -c Release -r win-x64 --self-contained false
-```
+- Latest version: [`v2026.04.23`](https://github.com/Ageous27/Windrose-Server-CPU-Cap/releases/tag/v2026.04.23)
+- Always-current link: [Latest release](https://github.com/Ageous27/Windrose-Server-CPU-Cap/releases/latest)
 
 ## Install as Windows Service (Administrator)
 
-```powershell
-$serviceName = "CpuGuardService"
-$exePath = "C:\Deploy\CpuGuard\CpuGuard.Service.exe"
+1. Download `CpuGuard.Service-net8.0-windows-win-x64-publish.zip` from the latest release.
+2. Extract the zip to `C:\CpuGuard` (overwrite files if updating).
+3. Set your `C:\CpuGuard\appsettings.json` values.
+4. Run the installer script:
 
-sc.exe create $serviceName binPath= "\"$exePath\"" start= auto obj= LocalSystem
-sc.exe description $serviceName "Monitors Windrose server activity and applies/removes Job Object CPU cap."
-sc.exe failure $serviceName reset= 86400 actions= restart/5000/restart/5000/restart/5000
-sc.exe start $serviceName
+```powershell
+powershell -ExecutionPolicy Bypass -File "C:\CpuGuard\install_CpuGuard_service.ps1"
+```
+
+If the service is already installed and you are updating to a newer release:
+
+```powershell
+sc.exe stop CpuGuardService
+# Extract latest release zip to C:\CpuGuard and overwrite existing files
+sc.exe start CpuGuardService
 ```
 
 ## Uninstall (Administrator)
