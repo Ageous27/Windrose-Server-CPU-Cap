@@ -11,6 +11,18 @@ Windows Service in C#/.NET 8 (x64) that:
 - Removes cap immediately when players return or `ProcessAddPlayer` is detected.
 - Re-attaches automatically when the server restarts.
 
+## Environment requirements
+
+- Windows x64 machine (Windows 10/11 or Windows Server) with Services support.
+- `.NET 8` runtime (x64) installed on the target machine (release build is framework-dependent).
+- Administrator PowerShell for install/update/uninstall (`sc.exe` + service registration).
+- Game servers installed with standard layout so log derivation works:
+  - `...\R5\Binaries\Win64\WindroseServer-Win64-Shipping.exe`
+  - `...\R5\Saved\Logs\R5.log`
+- Service account permissions to read server log files and inspect/manage server processes.
+
+If you plan to build from source instead of using release assets, install `.NET 8 SDK` (x64).
+
 ## Latest release
 
 - Latest version: [`v2026.04.23`](https://github.com/Ageous27/Windrose-Server-CPU-Cap/releases/tag/v2026.04.23)
