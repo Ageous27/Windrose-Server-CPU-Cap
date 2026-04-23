@@ -9,7 +9,7 @@ per server instance using Windows Job Objects.
 
 Key Features
 ------------
-- Auto-discovers up to 2 server instances by executable path.
+- Auto-discovers server instances by executable path.
 - Derives each server log path from executable path:
   ...\R5\Binaries\Win64\WindroseServer-Win64-Shipping.exe
   -> ...\R5\Saved\Logs\R5.log
@@ -29,7 +29,7 @@ File: CpuGuard.Service\appsettings.json
 Important settings:
 - ServerProcessName
 - AutoDiscover
-- MaxManagedInstances
+- MaxManagedInstances (auto-discovery scope)
 - CpuCapPercent (supports decimal values, e.g. 1.5)
 - ZeroPlayersDelaySeconds
 - ProcessAddPlayerGraceSeconds
@@ -56,4 +56,3 @@ Deploy Update (Typical)
 2) Replace files in deploy folder
 3) Start service
 4) Verify service status and logs
-

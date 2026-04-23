@@ -7,11 +7,11 @@ public sealed class CpuGuardOptions
     public string ServiceName { get; set; } = "CpuGuardService";
     public string ServerProcessName { get; set; } = "WindroseServer-Win64-Shipping";
     public bool AutoDiscover { get; set; } = true;
-    public int MaxManagedInstances { get; set; } = 2;
-    public int ZeroPlayersDelaySeconds { get; set; } = 60;
+    public int MaxManagedInstances { get; set; } = 5;
+    public int ZeroPlayersDelaySeconds { get; set; } = 20;
     public int TransitionCooldownSeconds { get; set; } = 15;
     public int ProcessAddPlayerGraceSeconds { get; set; } = 60;
-    public double CpuCapPercent { get; set; } = 5;
+    public double CpuCapPercent { get; set; } = 1.5;
     public int ProcessPollingSeconds { get; set; } = 2;
     public int LogPollingMilliseconds { get; set; } = 500;
     public bool BootstrapFromExistingLog { get; set; } = true;

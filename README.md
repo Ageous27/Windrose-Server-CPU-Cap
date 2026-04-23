@@ -2,7 +2,7 @@
 
 Windows Service in C#/.NET 8 (x64) that:
 
-- Auto-discovers up to two `WindroseServer-Win64-Shipping.exe` processes by executable path.
+- Auto-discovers `WindroseServer-Win64-Shipping.exe` processes by executable path.
 - Derives each log path from executable path (`...\R5\Binaries\Win64\...exe` -> `...\R5\Saved\Logs\R5.log`).
 - Tails each discovered `R5.log` independently in real time.
 - Tracks player count independently per discovered instance.
@@ -53,7 +53,7 @@ sc.exe delete $serviceName
 
 - `ServerProcessName`: process name without `.exe`.
 - `AutoDiscover`: must remain `true` for auto-discovered instances.
-- `MaxManagedInstances`: max number of discovered executable paths to manage.
+- `MaxManagedInstances`: max number of discovered executable paths to manage (auto-discovery scope).
 - `ZeroPlayersDelaySeconds`: idle delay before capping.
 - `ProcessAddPlayerGraceSeconds`: grace timer started by `ProcessAddPlayer` when player count is zero.
 - `TransitionCooldownSeconds`: anti-flap cooldown.
