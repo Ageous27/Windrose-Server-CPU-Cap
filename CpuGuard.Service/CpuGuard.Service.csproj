@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CreatePublishZip" AfterTargets="Publish">
+    <PropertyGroup>
+      <_PublishZipDir>$([System.IO.Path]::GetFullPath('$(PublishDir)..\'))</_PublishZipDir>
+      <_PublishZipTempFile>$(_PublishZipDir)$(AssemblyName)-$(TargetFramework)-$(RuntimeIdentifier)-publish.zip</_PublishZipTempFile>
+      <PublishZipFile>$(PublishDir)$(AssemblyName)-$(TargetFramework)-$(RuntimeIdentifier)-publish.zip</PublishZipFile>
+    </PropertyGroup>
+    <Delete Files="$(PublishZipFile)" Condition="Exists('$(PublishZipFile)')" />
+    <Delete Files="$(_PublishZipTempFile)" Condition="Exists('$(_PublishZipTempFile)')" />
+    <ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(_PublishZipTempFile)" Overwrite="true" />
+    <Copy SourceFiles="$(_PublishZipTempFile)" DestinationFiles="$(PublishZipFile)" OverwriteReadOnlyFiles="true" />
+    <Delete Files="$(_PublishZipTempFile)" Condition="Exists('$(_PublishZipTempFile)')" />
+    <Message Importance="high" Text="Created publish zip: $(PublishZipFile)" />
+  </Target>
+</Project>
